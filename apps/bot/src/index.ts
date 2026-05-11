@@ -7,7 +7,6 @@ import { loadComponents } from "./loaders/components.js";
 import { loadEvents } from "./loaders/events.js";
 import { loadJobs } from "./loaders/jobs.js";
 import { registries } from "./events/interactionCreate.js";
-import { startScheduler } from "./lib/scheduler.js";
 
 const log = createLogger("bot:main");
 
@@ -16,8 +15,7 @@ async function main() {
   registries.commands = await loadCommands();
   registries.components = await loadComponents();
   await loadEvents(client);
-  const jobs = await loadJobs();
-  client.once("ready", () => { startScheduler(client, jobs); });
+  registries.jobs = await loadJobs();
   process.on("unhandledRejection", (err) => void handleError(err, { client, where: "unhandledRejection" }));
   process.on("uncaughtException", (err) => void handleError(err, { client, where: "uncaughtException" }));
   await client.login(env.DISCORD_TOKEN);

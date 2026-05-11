@@ -6,10 +6,12 @@ import { handleError } from "../lib/errorHandler.js";
 import { parseCustomId } from "../lib/customId.js";
 import type { AnyCommand } from "../lib/defineCommand.js";
 import type { ComponentHandler } from "../lib/defineComponent.js";
+import type { Job } from "../lib/defineJob.js";
 
 export const registries = {
   commands: new Map<string, AnyCommand>(),
   components: new Map<string, ComponentHandler>(),
+  jobs: [] as Array<{ name: string; job: Job }>,
 };
 
 async function resolveLocale(guildId: string | null, fallback: string): Promise<Locale> {
@@ -32,10 +34,14 @@ export default defineEvent({
         if (cmd?.kind === "chat" && cmd.autocomplete) await cmd.autocomplete(i, ctx);
         return;
       }
-      if (i.isChatInputCommand() || i.isContextMenuCommand()) {
+      if (i.isChatInputCommand()) {
         const cmd = registries.commands.get(i.commandName);
-        if (!cmd) return;
-        await cmd.execute(i as never, ctx);
+        if (cmd?.kind === "chat") await cmd.execute(i, ctx);
+        return;
+      }
+      if (i.isContextMenuCommand()) {
+        const cmd = registries.commands.get(i.commandName);
+        if (cmd?.kind === "context") await cmd.execute(i, ctx);
         return;
       }
       if (i.isMessageComponent() || i.isModalSubmit()) {
