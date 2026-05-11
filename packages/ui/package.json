@@ -16,12 +16,12 @@
     "tailwind-merge": "^2.5.5"
   },
   "peerDependencies": {
-    "react": "19.0.0"
+    "react": "^19.0.0"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
-    "@types/react": "19.0.0",
-    "react": "19.0.0",
+    "@types/react": "^19.2.14",
+    "react": "^19.2.6",
     "typescript": "5.9.2"
   }
 }
