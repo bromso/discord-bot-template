@@ -7,4 +7,4 @@ export default {
     noPermission: "You need Manage Server permission.",
   },
   errors: { unknown: "Something went wrong. The error has been logged." },
-} as const;
+};
