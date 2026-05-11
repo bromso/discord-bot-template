@@ -21,11 +21,11 @@ A batteries-included starter for production-grade Discord bots. Comes with a typ
 
 ```bash
 bun install
-cp .env.example .env       # fill in Discord creds + AUTH_SECRET (openssl rand -base64 32)
-docker compose up -d
-bun run db:push            # apply schema to local Postgres
-bun run bot:register --guild "$DEV_GUILD_ID"   # register slash commands to your dev guild
-bun run dev                # bot + dashboard in parallel
+cp .env.example .env                            # fill in Discord creds + AUTH_SECRET (openssl rand -base64 32)
+docker compose up -d --wait                     # start Postgres and wait until healthy
+bun run db:migrate                              # apply committed migrations to local Postgres
+bun run bot:register --guild "$DEV_GUILD_ID"    # register slash commands to your dev guild
+bun run dev                                     # bot + dashboard in parallel
 ```
 
 The dashboard is then on `http://localhost:3000` and the bot connects to the gateway as soon as `DISCORD_TOKEN` is valid. Slash commands take a minute or two to propagate even when scoped to a single guild.
@@ -141,7 +141,7 @@ Three steps, one per layer:
 
 1. **Extend the schema.** Add a field to the `GuildSettings` type in [`packages/db/src/schema/guilds.ts`](packages/db/src/schema/guilds.ts). The column is `jsonb` so no migration is strictly required for shape-only changes, but run `bun run db:generate` if you want a snapshot.
 2. **Surface it in `/settings`.** Add a subcommand or component in [`apps/bot/src/commands/settings.ts`](apps/bot/src/commands/settings.ts) that calls `updateGuildSettings(guildId, { yourField })`.
-3. **Surface it in the dashboard.** Add the input to [`apps/dashboard/src/app/(app)/guilds/[id]/settings/page.tsx`](apps/dashboard/src/app/(app)/guilds/[id]/settings/page.tsx) and extend the Zod validator in the server action under `apps/dashboard/src/actions/`.
+3. **Surface it in the dashboard.** Add the input to [`apps/dashboard/src/app/(app)/guilds/[id]/settings/page.tsx`](apps/dashboard/src/app/(app)/guilds/[id]/settings/page.tsx) and extend the Zod schema in [`apps/dashboard/src/actions/settings.ts`](apps/dashboard/src/actions/settings.ts).
 
 The bot and dashboard both go through the same `updateGuildSettings()` query in `@repo/db`, so you only have one source of truth for writes.
 
