@@ -28,6 +28,8 @@ bun run bot:register --guild "$DEV_GUILD_ID"    # register slash commands to you
 bun run dev                                     # bot + dashboard in parallel
 ```
 
+**VS Code users:** Press F1 and run "Dev Containers: Reopen in Container" instead of the steps above — Postgres, Bun, and `bun install` are wired automatically via `.devcontainer/`. You still need to fill `.env` with Discord credentials before running `bun run dev`.
+
 The dashboard is then on `http://localhost:3000` and the bot connects to the gateway as soon as `DISCORD_TOKEN` is valid. Slash commands take a minute or two to propagate even when scoped to a single guild.
 
 ## Project structure

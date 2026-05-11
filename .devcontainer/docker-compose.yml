@@ -1,0 +1,17 @@
+services:
+  workspace:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workspaces/discord-bot-template:cached
+      - bun-cache:/home/bun/.bun/install/cache
+    command: sleep infinity
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - default
+
+volumes:
+  bun-cache:

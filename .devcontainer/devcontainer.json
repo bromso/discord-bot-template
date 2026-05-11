@@ -1,0 +1,24 @@
+{
+  "name": "discord-bot-template",
+  "dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
+  "service": "workspace",
+  "workspaceFolder": "/workspaces/discord-bot-template",
+  "remoteUser": "bun",
+  "containerEnv": {
+    "DATABASE_URL": "postgres://postgres:postgres@postgres:5432/bot"
+  },
+  "forwardPorts": [3000],
+  "postCreateCommand": "bun install --frozen-lockfile && bun --cwd=packages/db run migrate || true",
+  "customizations": {
+    "vscode": {
+      "extensions": ["biomejs.biome", "bradlc.vscode-tailwindcss", "ms-azuretools.vscode-docker"],
+      "settings": {
+        "editor.defaultFormatter": "biomejs.biome",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports.biome": "explicit"
+        }
+      }
+    }
+  }
+}
