@@ -1,6 +1,6 @@
-import { EmbedBuilder, type Client, type TextChannel } from "discord.js";
 import { env } from "@repo/config";
 import { createLogger } from "@repo/logger";
+import { type Client, EmbedBuilder, type TextChannel } from "discord.js";
 
 const log = createLogger("bot:error");
 const recent = new Map<string, number>();
@@ -27,7 +27,9 @@ export async function handleError(
         const e = new EmbedBuilder()
           .setTitle("Bot error")
           .setColor(0xff5555)
-          .setDescription("```" + String(err instanceof Error ? err.stack : err).slice(0, 1800) + "```")
+          .setDescription(
+            "```" + String(err instanceof Error ? err.stack : err).slice(0, 1800) + "```",
+          )
           .addFields(
             { name: "Where", value: ctx.where ?? "unknown", inline: true },
             { name: "Guild", value: ctx.guildId ?? "—", inline: true },

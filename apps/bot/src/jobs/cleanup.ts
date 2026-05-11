@@ -1,5 +1,5 @@
-import { defineJob } from "../lib/defineJob.js";
 import { createLogger } from "@repo/logger";
+import { defineJob } from "../lib/defineJob.js";
 
 const log = createLogger("bot:job:cleanup");
 

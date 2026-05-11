@@ -1,2 +1,4 @@
 export const dynamic = "force-dynamic";
-export function GET() { return new Response("ok", { status: 200 }); }
+export function GET() {
+  return new Response("ok", { status: 200 });
+}

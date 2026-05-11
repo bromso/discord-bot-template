@@ -1,6 +1,6 @@
-import { REST, Routes } from "discord.js";
 import { env } from "@repo/config";
 import { createLogger } from "@repo/logger";
+import { REST, Routes } from "discord.js";
 import { loadCommands } from "../src/loaders/commands.js";
 
 const log = createLogger("bot:register");

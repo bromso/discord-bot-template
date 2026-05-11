@@ -1,5 +1,5 @@
-import { Events } from "discord.js";
 import { createLogger } from "@repo/logger";
+import { Events } from "discord.js";
 import { defineEvent } from "../lib/defineEvent.js";
 import { startScheduler } from "../lib/scheduler.js";
 import { registries } from "./interactionCreate.js";

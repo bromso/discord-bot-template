@@ -1,5 +1,5 @@
 import { readdir } from "node:fs/promises";
-import { join, basename, extname } from "node:path";
+import { basename, extname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Job } from "../lib/defineJob.js";
 

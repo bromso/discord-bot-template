@@ -13,15 +13,11 @@ export default async function globalSetup() {
 
   // Apply schema to the dedicated dashboard test DB so it can't race with
   // packages/db's own tests (which use bot_test). drizzle-kit lives in @repo/db.
-  const r = spawnSync(
-    "bun",
-    ["x", "drizzle-kit", "push", "--force"],
-    {
-      cwd: new URL("../../../packages/db", import.meta.url).pathname,
-      stdio: "inherit",
-      env: { ...process.env, DATABASE_URL: url },
-    },
-  );
+  const r = spawnSync("bun", ["x", "drizzle-kit", "push", "--force"], {
+    cwd: new URL("../../../packages/db", import.meta.url).pathname,
+    stdio: "inherit",
+    env: { ...process.env, DATABASE_URL: url },
+  });
   if (r.status !== 0) throw new Error("drizzle-kit push failed");
   process.env.DATABASE_URL = url;
 }

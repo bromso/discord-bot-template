@@ -1,7 +1,7 @@
-import { ShardingManager } from "discord.js";
 import { fileURLToPath } from "node:url";
 import { env } from "@repo/config";
 import { createLogger } from "@repo/logger";
+import { ShardingManager } from "discord.js";
 
 const log = createLogger("bot:shard");
 const file = fileURLToPath(new URL("./index.ts", import.meta.url));

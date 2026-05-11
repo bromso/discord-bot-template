@@ -32,7 +32,10 @@ export async function listAdminGuilds(userId: string): Promise<GuildSummary[]> {
   });
   if (!res.ok) return [];
   const raw = (await res.json()) as Array<{
-    id: string; name: string; icon: string | null; permissions: string;
+    id: string;
+    name: string;
+    icon: string | null;
+    permissions: string;
   }>;
   const present = new Set(
     (await db.select({ id: schema.guilds.id }).from(schema.guilds)).map((g) => g.id),

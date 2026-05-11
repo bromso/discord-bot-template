@@ -1,9 +1,11 @@
-import { beforeEach, describe, expect, it } from "vitest";
 import { db, guilds } from "@repo/db";
+import { beforeEach, describe, expect, it } from "vitest";
 import { saveGuildSettings } from "./settings.js";
 
 describe("saveGuildSettings", () => {
-  beforeEach(async () => { await db.delete(guilds); });
+  beforeEach(async () => {
+    await db.delete(guilds);
+  });
 
   it("persists locale and welcome message", async () => {
     const fd = new FormData();
