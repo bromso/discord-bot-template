@@ -1,4 +1,4 @@
-import { ApplicationCommandType, ContextMenuCommandBuilder } from "discord.js";
+import { ApplicationCommandType, ContextMenuCommandBuilder, MessageFlags } from "discord.js";
 import { defineCommand } from "../lib/defineCommand.js";
 
 export default defineCommand({
@@ -10,7 +10,7 @@ export default defineCommand({
     if (!i.isMessageContextMenuCommand()) return;
     await i.reply({
       content: `Thanks — moderators have been notified about [this message](${i.targetMessage.url}).`,
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral,
     });
   },
 });

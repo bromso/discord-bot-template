@@ -1,3 +1,4 @@
+import { MessageFlags } from "discord.js";
 import { describe, expect, it, vi } from "vitest";
 import command from "./ping.js";
 
@@ -14,6 +15,6 @@ describe("/ping", () => {
     const i = stub();
     const ctx = { locale: "en" as const, t: (_: string, v?: any) => `Pong! (${v?.latency}ms)` };
     await (command as any).execute(i, ctx);
-    expect(i.reply).toHaveBeenCalledWith({ content: "Pong! (42ms)", ephemeral: true });
+    expect(i.reply).toHaveBeenCalledWith({ content: "Pong! (42ms)", flags: MessageFlags.Ephemeral });
   });
 });

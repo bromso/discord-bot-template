@@ -53,7 +53,7 @@ Each app pulls from `@repo/*` workspace packages. Turborepo orchestrates `dev`, 
 Drop a file into `apps/bot/src/commands/`. It is auto-loaded at startup. Cribbed from [`apps/bot/src/commands/ping.ts`](apps/bot/src/commands/ping.ts):
 
 ```ts
-import { SlashCommandBuilder } from "discord.js";
+import { MessageFlags, SlashCommandBuilder } from "discord.js";
 import { defineCommand } from "../lib/defineCommand.js";
 
 export default defineCommand({
@@ -62,7 +62,7 @@ export default defineCommand({
     .setDescription("Replies with bot latency."),
   async execute(i, ctx) {
     const latency = i.client.ws.ping;
-    await i.reply({ content: ctx.t("ping.reply", { latency }), ephemeral: true });
+    await i.reply({ content: ctx.t("ping.reply", { latency }), flags: MessageFlags.Ephemeral });
   },
 });
 ```

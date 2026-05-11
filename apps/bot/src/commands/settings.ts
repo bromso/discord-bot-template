@@ -2,6 +2,8 @@ import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
+  InteractionContextType,
+  MessageFlags,
   PermissionFlagsBits,
   SlashCommandBuilder,
   StringSelectMenuBuilder,
@@ -20,7 +22,7 @@ export default defineCommand({
     .setName("settings")
     .setDescription("Configure the bot for this server.")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
-    .setDMPermission(false)
+    .setContexts(InteractionContextType.Guild)
     .addSubcommand((s) => s.setName("show").setDescription("Show current settings"))
     .addSubcommand((s) =>
       s.setName("locale")
@@ -56,7 +58,7 @@ export default defineCommand({
           .setStyle(ButtonStyle.Secondary),
       );
       await i.reply({
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
         content: [
           `**${ctx.t("settings.title")}**`,
           `Locale: \`${g?.locale ?? "en"}\``,
@@ -69,13 +71,13 @@ export default defineCommand({
     if (sub === "locale") {
       const value = i.options.getString("value", true);
       await updateGuildSettings(i.guildId, { locale: value });
-      await i.reply({ content: ctx.t("settings.localeChanged", { locale: value }), ephemeral: true });
+      await i.reply({ content: ctx.t("settings.localeChanged", { locale: value }), flags: MessageFlags.Ephemeral });
       return;
     }
     if (sub === "welcome") {
       const message = i.options.getString("message", true);
       await updateGuildSettings(i.guildId, { welcomeMessage: message });
-      await i.reply({ content: ctx.t("settings.welcomeUpdated"), ephemeral: true });
+      await i.reply({ content: ctx.t("settings.welcomeUpdated"), flags: MessageFlags.Ephemeral });
     }
   },
 
