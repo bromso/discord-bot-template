@@ -24,6 +24,8 @@
         "./src/*"
       ]
     },
+    "declaration": false,
+    "declarationMap": false,
     "noEmit": true
   }
 }
