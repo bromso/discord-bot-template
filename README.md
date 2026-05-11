@@ -10,12 +10,13 @@ A batteries-included starter for production-grade Discord bots. Comes with a typ
 | Monorepo | Turborepo |
 | Discord library | discord.js |
 | Database | Postgres + Drizzle ORM |
-| Dashboard | Next.js 15 + Auth.js v5 |
-| UI | Tailwind v4 + shadcn-style `Button` |
+| Dashboard | Next.js 16 + Auth.js v5 |
+| UI | Tailwind v4 + shadcn-style `Button` + Iconify (lucide) |
 | Logging | pino |
 | Scheduler | croner |
 | i18n | plain TS locale files |
 | Tests | Vitest |
+| Lint + format | Biome |
 
 ## Quick start
 
@@ -37,14 +38,13 @@ The dashboard is then on `http://localhost:3000` and the bot connects to the gat
 ```
 apps/
   bot/          # discord.js client, slash commands, events, jobs, sharding entry
-  dashboard/    # Next.js 15 app router, Auth.js v5 (Discord provider), guild settings UI
+  dashboard/    # Next.js 16 app router, Auth.js v5 (Discord provider), guild settings UI
 packages/
   config/       # Zod-parsed env (single source of truth for required variables)
   db/           # Drizzle schema, queries, migrator, drizzle-kit config
   i18n/         # locale files + tiny t() helper
   logger/       # pino factory with sensible prod/dev defaults
-  ui/           # shadcn-host: Button + utilities, Tailwind v4 styles
-  eslint-config/
+  ui/           # shadcn-host: Button + Icon, Tailwind v4 styles
   typescript-config/
 ```
 
