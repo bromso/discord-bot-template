@@ -10,12 +10,13 @@ A batteries-included starter for production-grade Discord bots. Comes with a typ
 | Monorepo | Turborepo |
 | Discord library | discord.js |
 | Database | Postgres + Drizzle ORM |
-| Dashboard | Next.js 15 + Auth.js v5 |
-| UI | Tailwind v4 + shadcn-style `Button` |
+| Dashboard | Next.js 16 + Auth.js v5 |
+| UI | Tailwind v4 + shadcn-style `Button` + Iconify (lucide) |
 | Logging | pino |
 | Scheduler | croner |
 | i18n | plain TS locale files |
 | Tests | Vitest |
+| Lint + format | Biome |
 
 ## Quick start
 
@@ -28,6 +29,8 @@ bun run bot:register --guild "$DEV_GUILD_ID"    # register slash commands to you
 bun run dev                                     # bot + dashboard in parallel
 ```
 
+**VS Code users:** Press F1 and run "Dev Containers: Reopen in Container" instead of the steps above — Postgres, Bun, and `bun install` are wired automatically via `.devcontainer/`. You still need to fill `.env` with Discord credentials before running `bun run dev`.
+
 The dashboard is then on `http://localhost:3000` and the bot connects to the gateway as soon as `DISCORD_TOKEN` is valid. Slash commands take a minute or two to propagate even when scoped to a single guild.
 
 ## Project structure
@@ -35,14 +38,13 @@ The dashboard is then on `http://localhost:3000` and the bot connects to the gat
 ```
 apps/
   bot/          # discord.js client, slash commands, events, jobs, sharding entry
-  dashboard/    # Next.js 15 app router, Auth.js v5 (Discord provider), guild settings UI
+  dashboard/    # Next.js 16 app router, Auth.js v5 (Discord provider), guild settings UI
 packages/
   config/       # Zod-parsed env (single source of truth for required variables)
   db/           # Drizzle schema, queries, migrator, drizzle-kit config
   i18n/         # locale files + tiny t() helper
   logger/       # pino factory with sensible prod/dev defaults
-  ui/           # shadcn-host: Button + utilities, Tailwind v4 styles
-  eslint-config/
+  ui/           # shadcn-host: Button + Icon, Tailwind v4 styles
   typescript-config/
 ```
 

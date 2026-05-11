@@ -1,7 +1,7 @@
 import { getGuild, upsertGuild } from "@repo/db";
 import { Button } from "@repo/ui/components/button";
-import { requireGuildAdmin } from "@/lib/guards";
 import { saveGuildSettings } from "@/actions/settings";
+import { requireGuildAdmin } from "@/lib/guards";
 
 export default async function SettingsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -34,7 +34,9 @@ export default async function SettingsPage({ params }: { params: Promise<{ id: s
             className="rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2"
           />
         </label>
-        <Button type="submit" className="justify-self-start">Save</Button>
+        <Button type="submit" className="justify-self-start">
+          Save
+        </Button>
       </form>
     </main>
   );

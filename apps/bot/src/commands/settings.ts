@@ -1,3 +1,4 @@
+import { getGuild, updateGuildSettings, upsertGuild } from "@repo/db";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -8,9 +9,8 @@ import {
   SlashCommandBuilder,
   StringSelectMenuBuilder,
 } from "discord.js";
-import { getGuild, updateGuildSettings, upsertGuild } from "@repo/db";
-import { defineCommand } from "../lib/defineCommand.js";
 import { buildCustomId } from "../lib/customId.js";
+import { defineCommand } from "../lib/defineCommand.js";
 
 const LOCALES = [
   { name: "English", value: "en" },
@@ -25,14 +25,16 @@ export default defineCommand({
     .setContexts(InteractionContextType.Guild)
     .addSubcommand((s) => s.setName("show").setDescription("Show current settings"))
     .addSubcommand((s) =>
-      s.setName("locale")
+      s
+        .setName("locale")
         .setDescription("Set the server locale")
         .addStringOption((o) =>
           o.setName("value").setDescription("Locale").setRequired(true).setAutocomplete(true),
         ),
     )
     .addSubcommand((s) =>
-      s.setName("welcome")
+      s
+        .setName("welcome")
         .setDescription("Set the welcome message")
         .addStringOption((o) =>
           o.setName("message").setDescription("Welcome text").setRequired(true),
@@ -71,7 +73,10 @@ export default defineCommand({
     if (sub === "locale") {
       const value = i.options.getString("value", true);
       await updateGuildSettings(i.guildId, { locale: value });
-      await i.reply({ content: ctx.t("settings.localeChanged", { locale: value }), flags: MessageFlags.Ephemeral });
+      await i.reply({
+        content: ctx.t("settings.localeChanged", { locale: value }),
+        flags: MessageFlags.Ephemeral,
+      });
       return;
     }
     if (sub === "welcome") {

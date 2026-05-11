@@ -1,5 +1,5 @@
-import { signIn } from "@/auth";
 import { Button } from "@repo/ui/components/button";
+import { signIn } from "@/auth";
 
 export default function Login() {
   return (

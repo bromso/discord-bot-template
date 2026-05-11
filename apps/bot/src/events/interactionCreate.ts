@@ -1,12 +1,12 @@
-import { Events, MessageFlags } from "discord.js";
-import { type Locale, t } from "@repo/i18n";
 import { getGuild } from "@repo/db";
-import { defineEvent } from "../lib/defineEvent.js";
-import { handleError } from "../lib/errorHandler.js";
+import { type Locale, t } from "@repo/i18n";
+import { Events, MessageFlags } from "discord.js";
 import { parseCustomId } from "../lib/customId.js";
 import type { AnyCommand } from "../lib/defineCommand.js";
 import type { ComponentHandler } from "../lib/defineComponent.js";
+import { defineEvent } from "../lib/defineEvent.js";
 import type { Job } from "../lib/defineJob.js";
+import { handleError } from "../lib/errorHandler.js";
 
 export const registries = {
   commands: new Map<string, AnyCommand>(),
@@ -58,7 +58,9 @@ export default defineEvent({
         where: `interaction:${i.type}`,
       });
       if (i.isRepliable() && !i.replied && !i.deferred) {
-        await i.reply({ content: ctx.t("errors.unknown"), flags: MessageFlags.Ephemeral }).catch(() => {});
+        await i
+          .reply({ content: ctx.t("errors.unknown"), flags: MessageFlags.Ephemeral })
+          .catch(() => {});
       }
     }
   },

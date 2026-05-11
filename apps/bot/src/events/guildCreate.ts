@@ -1,7 +1,7 @@
-import { Events } from "discord.js";
 import { upsertGuild } from "@repo/db";
-import { defineEvent } from "../lib/defineEvent.js";
 import { createLogger } from "@repo/logger";
+import { Events } from "discord.js";
+import { defineEvent } from "../lib/defineEvent.js";
 
 const log = createLogger("bot:guildCreate");
 

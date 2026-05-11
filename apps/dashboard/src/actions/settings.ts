@@ -1,7 +1,7 @@
 "use server";
+import { updateGuildSettings, upsertGuild } from "@repo/db";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { updateGuildSettings, upsertGuild } from "@repo/db";
 import { requireGuildAdmin } from "@/lib/guards";
 
 const Input = z.object({

@@ -1,6 +1,6 @@
 import { eq, sql } from "drizzle-orm";
 import { db } from "../client.js";
-import { guilds, type Guild, type GuildSettings } from "../schema/guilds.js";
+import { type Guild, type GuildSettings, guilds } from "../schema/guilds.js";
 
 export async function getGuild(id: string): Promise<Guild | undefined> {
   return db.query.guilds.findFirst({ where: eq(guilds.id, id) });

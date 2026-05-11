@@ -5,4 +5,6 @@ export type Job = {
   shardZeroOnly?: boolean;
   run: (client: BotClient) => Promise<void> | void;
 };
-export function defineJob(j: Job): Job { return j; }
+export function defineJob(j: Job): Job {
+  return j;
+}

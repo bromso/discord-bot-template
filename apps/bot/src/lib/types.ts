@@ -1,3 +1,4 @@
+import type { Locale } from "@repo/i18n";
 import type {
   AutocompleteInteraction,
   ChatInputCommandInteraction,
@@ -6,7 +7,6 @@ import type {
   ModalSubmitInteraction,
   UserContextMenuCommandInteraction,
 } from "discord.js";
-import type { Locale } from "@repo/i18n";
 
 export interface Ctx {
   locale: Locale;

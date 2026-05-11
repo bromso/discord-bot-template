@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { db } from "../client.js";
 import { guilds } from "../schema/guilds.js";
-import { getGuild, upsertGuild, updateGuildSettings } from "./guilds.js";
+import { getGuild, updateGuildSettings, upsertGuild } from "./guilds.js";
 
 describe("guild queries", () => {
   beforeEach(async () => {

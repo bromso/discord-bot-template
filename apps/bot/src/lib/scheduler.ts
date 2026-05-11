@@ -1,8 +1,8 @@
+import { createLogger } from "@repo/logger";
 import { Cron } from "croner";
 import type { BotClient } from "../client.js";
 import type { Job } from "./defineJob.js";
 import { handleError } from "./errorHandler.js";
-import { createLogger } from "@repo/logger";
 
 const log = createLogger("bot:scheduler");
 
@@ -25,5 +25,7 @@ export function startScheduler(client: BotClient, jobs: Array<{ name: string; jo
     handles.push(cron);
     log.info({ name, cron: job.cron, next: cron.nextRun()?.toISOString() }, "job scheduled");
   }
-  return () => handles.forEach((h) => h.stop());
+  return () => {
+    for (const h of handles) h.stop();
+  };
 }

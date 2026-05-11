@@ -1,4 +1,5 @@
 import type en from "./en.js";
+
 const dict: typeof en = {
   ping: { reply: "Pong! ({latency}ms)" },
   settings: {

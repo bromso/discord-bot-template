@@ -1,5 +1,5 @@
-import pino from "pino";
 import { env } from "@repo/config";
+import pino from "pino";
 
 const isDev = env.NODE_ENV !== "production";
 

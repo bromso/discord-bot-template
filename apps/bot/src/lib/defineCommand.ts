@@ -1,8 +1,8 @@
 import type {
-  SlashCommandBuilder,
-  SlashCommandSubcommandsOnlyBuilder,
-  SlashCommandOptionsOnlyBuilder,
   ContextMenuCommandBuilder,
+  SlashCommandBuilder,
+  SlashCommandOptionsOnlyBuilder,
+  SlashCommandSubcommandsOnlyBuilder,
 } from "discord.js";
 import type {
   AnyContextMenuInteraction,
@@ -13,10 +13,7 @@ import type {
 
 export type ChatCommand = {
   kind: "chat";
-  data:
-    | SlashCommandBuilder
-    | SlashCommandSubcommandsOnlyBuilder
-    | SlashCommandOptionsOnlyBuilder;
+  data: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | SlashCommandOptionsOnlyBuilder;
   execute: (i: ChatCmdInteraction, ctx: Ctx) => Promise<void>;
   autocomplete?: (i: AutocompleteInteraction, ctx: Ctx) => Promise<void>;
 };

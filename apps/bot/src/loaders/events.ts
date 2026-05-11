@@ -11,8 +11,11 @@ export async function loadEvents(client: BotClient): Promise<void> {
   for (const f of files) {
     const mod = (await import(join(dir, f))) as { default: EventDef };
     const handler = async (...args: unknown[]) => {
-      try { await mod.default.execute(client, ...(args as never)); }
-      catch (err) { await handleError(err, { client, where: `event:${String(mod.default.name)}` }); }
+      try {
+        await mod.default.execute(client, ...(args as never));
+      } catch (err) {
+        await handleError(err, { client, where: `event:${String(mod.default.name)}` });
+      }
     };
     if (mod.default.once) client.once(mod.default.name, handler);
     else client.on(mod.default.name, handler);

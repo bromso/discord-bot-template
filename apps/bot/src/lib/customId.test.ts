@@ -8,7 +8,9 @@ describe("customId", () => {
   });
   it("parses back to {module, action, args}", () => {
     expect(parseCustomId("settings:pick:locale:sv")).toEqual({
-      module: "settings", action: "pick", args: ["locale", "sv"],
+      module: "settings",
+      action: "pick",
+      args: ["locale", "sv"],
     });
   });
   it("rejects missing module/action", () => {
