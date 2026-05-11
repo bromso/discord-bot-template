@@ -21,6 +21,11 @@ async function getDiscordToken(userId: string): Promise<string | null> {
 export async function listAdminGuilds(userId: string): Promise<GuildSummary[]> {
   const token = await getDiscordToken(userId);
   if (!token) return [];
+  // NOTE: Discord access tokens expire in ~7 days. We don't refresh here, so a
+  // user who signs in less frequently will get a 401, and listAdminGuilds() will
+  // return []. For production use, store refresh_token (Auth.js does this in
+  // `accounts.refresh_token`) and POST /api/v10/oauth2/token with
+  // grant_type=refresh_token on 401, then retry.
   const res = await fetch("https://discord.com/api/v10/users/@me/guilds", {
     headers: { Authorization: `Bearer ${token}` },
     next: { revalidate: 30 },

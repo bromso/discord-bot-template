@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { db } from "../client.js";
 import { guilds, type Guild, type GuildSettings } from "../schema/guilds.js";
 
@@ -7,8 +7,13 @@ export async function getGuild(id: string): Promise<Guild | undefined> {
 }
 
 export async function upsertGuild(id: string): Promise<Guild> {
-  const [row] = await db.insert(guilds).values({ id }).onConflictDoNothing().returning();
-  return row ?? (await getGuild(id))!;
+  const [row] = await db
+    .insert(guilds)
+    .values({ id })
+    .onConflictDoUpdate({ target: guilds.id, set: { id: sql`excluded.id` } })
+    .returning();
+  if (!row) throw new Error(`upsertGuild(${id}) returned no row`);
+  return row;
 }
 
 export async function updateGuildSettings(
