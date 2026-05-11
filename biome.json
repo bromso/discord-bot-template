@@ -10,6 +10,7 @@
       "!**/.turbo",
       "!**/node_modules",
       "!**/migrations",
+      "!**/coverage",
       "!**/*.css"
     ]
   },
