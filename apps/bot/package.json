@@ -1,0 +1,29 @@
+{
+  "name": "bot",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "register": "bun scripts/register-commands.ts",
+    "unregister": "bun scripts/delete-commands.ts",
+    "test": "vitest run",
+    "lint": "echo no-op",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/config": "*",
+    "@repo/db": "*",
+    "@repo/i18n": "*",
+    "@repo/logger": "*",
+    "croner": "^9.0.0",
+    "discord.js": "^14.16.3"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/bun": "latest",
+    "typescript": "5.9.2",
+    "vitest": "^2.1.8"
+  }
+}
