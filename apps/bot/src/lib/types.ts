@@ -1,10 +1,9 @@
 import type {
   AutocompleteInteraction,
-  ButtonInteraction,
   ChatInputCommandInteraction,
+  MessageComponentInteraction,
   MessageContextMenuCommandInteraction,
   ModalSubmitInteraction,
-  StringSelectMenuInteraction,
   UserContextMenuCommandInteraction,
 } from "discord.js";
 import type { Locale } from "@repo/i18n";
@@ -18,8 +17,5 @@ export type ChatCmdInteraction = ChatInputCommandInteraction;
 export type AnyContextMenuInteraction =
   | UserContextMenuCommandInteraction
   | MessageContextMenuCommandInteraction;
-export type ComponentInteraction =
-  | ButtonInteraction
-  | StringSelectMenuInteraction
-  | ModalSubmitInteraction;
+export type ComponentInteraction = MessageComponentInteraction | ModalSubmitInteraction;
 export type { AutocompleteInteraction };
