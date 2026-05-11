@@ -8,12 +8,12 @@
     "check-types": "turbo run check-types",
     "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
-    "db:generate": "bun --cwd packages/db run generate",
-    "db:migrate": "bun --cwd packages/db run migrate",
-    "db:push": "bun --cwd packages/db run push",
-    "db:studio": "bun --cwd packages/db run studio",
-    "bot:register": "bun --cwd apps/bot run register",
-    "bot:unregister": "bun --cwd apps/bot run unregister"
+    "db:generate": "bun --cwd=packages/db run generate",
+    "db:migrate": "bun --cwd=packages/db run migrate",
+    "db:push": "bun --cwd=packages/db run push",
+    "db:studio": "bun --cwd=packages/db run studio",
+    "bot:register": "bun --cwd=apps/bot run register",
+    "bot:unregister": "bun --cwd=apps/bot run unregister"
   },
   "devDependencies": {
     "prettier": "^3.7.4",
