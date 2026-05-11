@@ -1,5 +1,6 @@
 import { env } from "@repo/config";
 import { Button } from "@repo/ui/components/button";
+import { Icon } from "@repo/ui/components/icon";
 import Link from "next/link";
 import { listAdminGuilds } from "@/lib/discord";
 import { requireUser } from "@/lib/guards";
@@ -17,7 +18,7 @@ export default async function GuildsPage() {
             className="flex items-center justify-between rounded-lg border border-zinc-800 px-4 py-3"
           >
             <div className="flex items-center gap-3">
-              <div className="size-8 rounded bg-zinc-800" />
+              <Icon name="lucide:server" size={32} className="text-zinc-500" />
               <span className="font-medium">{g.name}</span>
             </div>
             {g.botPresent ? (
